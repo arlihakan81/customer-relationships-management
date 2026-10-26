@@ -1,5 +1,6 @@
 using CRM.API.Middlewares;
 using CRM.Application.Interfaces;
+using CRM.Application.Mapping;
 using CRM.Infrastructure.Contexts;
 using CRM.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -23,7 +24,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
-
+builder.Services.AddAutoMapper(options =>
+{
+    options.AddProfile<MapProfile>();
+});
 
 builder.Services.AddOpenApi(opt =>
 {
